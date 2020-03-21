@@ -1,0 +1,50 @@
+# Práctica 6. QuickHull. Gráficos en JS usando canvas.
+### Factor de ponderación: 9
+
+#### QuickHull
+
+El objetivo de esta práctica es familiarizarse con la programación gráfica en Javascript usando la API Canvas.
+
+La [envolvente convexa](https://en.wikipedia.org/wiki/Convex_hull) de un conjunto de puntos en el plano es un polígono convexo cuyos 
+vértices son algunos de los puntos del conjunto inicial de puntos.
+
+En esta práctica se propone calcular y representar gráficamente la envolvente convexa de un conjunto 
+de puntos del plano, generados aleatoriamente mediante el algoritmo concido como *QuickHull*.
+
+Desarrollar un programa `quick-hull.js` que calcule y represente gráficamente la
+envolvente convexa de un conjunto de puntos utilizando el algoritmo [Quickhull](https://en.wikipedia.org/wiki/Quickhull).
+
+Las siguientes deben tomarse como especificaciones de la aplicación a desarrollar:
+
+* El número de puntos que el programa genera de forma aleatoria para calcular su
+  envolvente, es un parámetro del programa que se introduce en una ventana similar a la que
+	utiliza el programa de ejemplo que calcula de forma aproximada el valor del número Pi.
+* Dado que la QuickHull es un algoritmo que se define de forma natural recursivamente, se admitirá cualquier tipo de solución, tanto recursiva como iterativa. Obviamente la solución recursiva es la primera que han de intentar porque será más sencilla de abordar que una alternativa iterativa.  
+* La interfaz gráfica del programa se mostrará embebida en una página web estática alojada en la máquina IaaS de la
+  asignatura.
+* La web mostrará un lienzo (canvas) que ocupe la mayor parte de una pantalla de ordenador de resolución usual.
+* Trate de imitar 
+  [esta simulación](https://en.wikipedia.org/wiki/Quickhull#/media/File:Animation_depicting_the_quickhull_algorithm.gif) 
+  priorizando la visualización de la nube de puntos y las líneas que el algoritmo dibuja progresivamente. 
+  El dibujo de los ejes de coordenadas puede considerarse una característica opcional.
+* El programa deberá dibujar línea a línea cada uno de los pasos que sigue el algoritmo en la evolución
+  del cómputo de la envolvente, de forma similar a como lo hace la simulación anterior.
+* El programa dejará transcurrir un cierto intervalo de tiempo entre el dibujo de una línea y la siguiente
+  en la evolución del algoritmo, de forma también análoga a como ocurre en la simulación previa.
+* No ponga esfuerzo alguno en el diseño del código HTML ni CSS de la página web. 
+  Centre todos sus esfuerzos en la programación gráfica a través de la API canvas.
+
+### Rúbrica de evaluacion del ejercicio
+
+Se señalan a continuación los aspectos más relevantes (la lista no es exhaustiva)
+que se tendrán en cuenta a la hora de evaluar este ejercicio:
+1. El comportamiento del programa debe ajustarse a lo solicitado en este enunciado.
+2. Deben usarse estructuras de datos adecuadas para representar los diferentes elementos que intervienen en el problema.
+3. Capacidad del programador(a) de introducir cambios en el programa desarrollado.
+4. El formato del código ha de cumplir con lo establecido en la [Guía de Estilo de Google](https://google.github.io/styleguide/jsguide.html)
+para Javascript. Utilice [ESLint](https://eslint.org/), convenientemente configurado, si se considera necesario para cumplir con este requisito.
+5. El código ha de estar documentado con [JSDoc](https://jsdoc.app/). Haga que la documentación del programa generada con JSDoc esté disponible a través de una web alojada en su máquina IaaS de la asignatura.
+6. Modularidad: el programa ha de escribirse de modo que las diferentes funcionalidades
+que se precisen sean encapsuladas en módulos, funciones y métodos cuya extensión léxica se
+mantenga acotada.
+7. Eficiencia del código desarrollado.
