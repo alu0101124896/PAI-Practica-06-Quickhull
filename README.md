@@ -13,3 +13,5 @@ For each assignment there should be a markdown file with the assignment descript
 Find that file and follow the instructions in it.
 
 When the evaluation session of the assignment is over, **do not forget** to upload the link to your repository to the virtual classroom.
+
+Link to the web page with the Quick-Hull Algorithm visualy implented here: http://10.6.129.34:8080
