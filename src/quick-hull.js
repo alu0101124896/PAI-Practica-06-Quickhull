@@ -4,7 +4,7 @@
  * @since Spring 2020
  * @summary University of La Laguna
  * @summary Computer Science - Interactive Aplication Programing
- * @description This program implements the Quick Hull Algorithm. More info about it here: https://en.wikipedia.org/wiki/main
+ * @description This program implements the Quick Hull Algorithm. More info about it here: https://en.wikipedia.org/wiki/Quickhull
  */
 
 "use strict"
