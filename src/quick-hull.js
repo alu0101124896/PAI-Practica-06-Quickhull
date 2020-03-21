@@ -181,7 +181,7 @@ function isInSide(pointToCheck, lineStartingPoint, lineEndingPoint) {
 }
 
 /**
- * @description Function that searchs for points outside of the current convex hull
+ * @description Recursive function that searchs for points outside of the current section of the convex hull
  * 
  * @param {array} convexHull - Array of points that forms the convex hull
  * @param {array} allCanvasPoints - Array of all canvas points
