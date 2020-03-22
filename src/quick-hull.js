@@ -111,6 +111,7 @@ function redrawAll(convexHull, points, CONTEXT, CANVAS) {
     drawLine(convexHull[convexHullIterator - 1], convexHull[convexHullIterator], CONTEXT);
   }
   drawLine(convexHull[convexHull.length - 1], convexHull[0], CONTEXT);
+  // prompt('Press enter to continue', ''); // Only way i found to actualy stop execution between one draw and another
 }
 
 /**
@@ -185,24 +186,24 @@ function isInSide(pointToCheck, lineStartingPoint, lineEndingPoint) {
  * 
  * @param {array} convexHull - Array of points that forms the convex hull
  * @param {array} allCanvasPoints - Array of all canvas points
- * @param {array} points - Array of points
+ * @param {array} subsetOfPoints - Array of the subset of points
  * @param {Point} leftMostPoint - Left most point of the current section of the convex hull
  * @param {Point} rightMostPoint - Right most point of the current section of the convex hull
  * @param {*} CONTEXT - Canvas context
  * @param {*} CANVAS - Canvas
  * @returns
  */
-function recursiveFindHull(convexHull, allCanvasPoints, points, leftMostPoint, rightMostPoint, CONTEXT, CANVAS) {
-  if (points.length === 0) {
+function recursiveFindHull(convexHull, allCanvasPoints, subsetOfPoints, leftMostPoint, rightMostPoint, CONTEXT, CANVAS) {
+  if (subsetOfPoints.length === 0) {
     return;
-  } else if (points.length === 1) {
-    convexHull.splice(convexHull.indexOf(leftMostPoint), 0, points[0]);
+  } else if (subsetOfPoints.length === 1) {
+    convexHull.splice(convexHull.indexOf(leftMostPoint), 0, subsetOfPoints[0]);
     redrawAll(convexHull, allCanvasPoints, CONTEXT, CANVAS);
   } else {
     let farthestPoint;
-    let farthestPointDistance = 0
+    let farthestPointDistance = 0;
 
-    points.forEach(pointToCheck => {
+    subsetOfPoints.forEach(pointToCheck => {
       let thisPointDistance = Math.abs(distanceToLine(pointToCheck, leftMostPoint, rightMostPoint));
       if (thisPointDistance > farthestPointDistance) {
         farthestPoint = pointToCheck;
@@ -216,7 +217,7 @@ function recursiveFindHull(convexHull, allCanvasPoints, points, leftMostPoint, r
     let pointsInSide1 = [];
     let pointsInSide2 = [];
 
-    points.forEach(pointToCheck => {
+    subsetOfPoints.forEach(pointToCheck => {
       if (isInSide(pointToCheck, leftMostPoint, farthestPoint) === 1) {
         pointsInSide1.push(pointToCheck);
       } else if (isInSide(pointToCheck, farthestPoint, rightMostPoint) === 1) {
@@ -224,8 +225,10 @@ function recursiveFindHull(convexHull, allCanvasPoints, points, leftMostPoint, r
       }
     });
 
-    recursiveFindHull(convexHull, allCanvasPoints, pointsInSide1, leftMostPoint, farthestPoint, CONTEXT, CANVAS);
-    recursiveFindHull(convexHull, allCanvasPoints, pointsInSide2, farthestPoint, rightMostPoint, CONTEXT, CANVAS);
+    setTimeout(() => {
+      recursiveFindHull(convexHull, allCanvasPoints, pointsInSide1, leftMostPoint, farthestPoint, CONTEXT, CANVAS);
+      recursiveFindHull(convexHull, allCanvasPoints, pointsInSide2, farthestPoint, rightMostPoint, CONTEXT, CANVAS);
+    }, 1000);
   }
 }
 
@@ -257,8 +260,42 @@ function recursiveQuickHull(allCanvasPoints, CONTEXT, CANVAS) {
     }
   });
 
-  recursiveFindHull(convexHull, allCanvasPoints, pointsInSide1, leftMostPoint, rightMostPoint, CONTEXT, CANVAS);
-  recursiveFindHull(convexHull, allCanvasPoints, pointsInSide2, rightMostPoint, leftMostPoint, CONTEXT, CANVAS);
+  setTimeout(() => {
+    recursiveFindHull(convexHull, allCanvasPoints, pointsInSide1, leftMostPoint, rightMostPoint, CONTEXT, CANVAS);
+    recursiveFindHull(convexHull, allCanvasPoints, pointsInSide2, rightMostPoint, leftMostPoint, CONTEXT, CANVAS);
+  }, 1000);
+}
+
+/**
+ * @description Iterative function that searchs the convex hull of the given array (Jarvins Wrap Algorithm)
+ *
+ * @param {array} allCanvasPoints - Array of all canvas points
+ * @param {*} CONTEXT - Canvas context
+ * @param {*} CANVAS - Canvas
+ */
+function iterativeConvexHullWrapping(allCanvasPoints, CONTEXT, CANVAS) {
+  let convexHull = [];
+  let leftMostPoint = allCanvasPoints.indexOf(findLeftMostPoint(allCanvasPoints));
+  let lastConvexHullPoint = allCanvasPoints.indexOf(findLeftMostPoint(allCanvasPoints));
+  let mostCounterClockWisePoint = 0;
+
+  do {
+    convexHull.push(allCanvasPoints[lastConvexHullPoint]);
+
+    if (convexHull.length > 1) {
+      redrawAll(convexHull, allCanvasPoints, CONTEXT, CANVAS);
+    }
+
+    mostCounterClockWisePoint = ((lastConvexHullPoint + 1) % allCanvasPoints.length);
+
+    for (let i = 0; i < allCanvasPoints.length; i++) {
+      if (isInSide(allCanvasPoints[lastConvexHullPoint], allCanvasPoints[i], allCanvasPoints[mostCounterClockWisePoint]) === 1) {
+        mostCounterClockWisePoint = i
+      }
+    }
+    lastConvexHullPoint = mostCounterClockWisePoint
+
+  } while (lastConvexHullPoint !== leftMostPoint);
 }
 
 /**
@@ -285,6 +322,7 @@ function main() {
     debugger;
     drawPoints(points, CONTEXT);
     recursiveQuickHull(points, CONTEXT, CANVAS);
+    // iterativeConvexHullWrapping(points, CONTEXT, CANVAS);
   }
 }
 
