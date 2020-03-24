@@ -1,5 +1,5 @@
 /**
- * @file country-abbreviation.js
+ * @file quick-hull.js
  * @author Sergio Tabares Hernández <alu0101124896@ull.edu.es>
  * @since Spring 2020
  * @summary University of La Laguna
