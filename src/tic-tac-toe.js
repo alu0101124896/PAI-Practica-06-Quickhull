@@ -4,7 +4,7 @@
  * @since Spring 2020
  * @summary University of La Laguna
  * @summary Computer Science - Interactive Aplication Programing
- * @description This program implements the Quick Hull Algorithm. More info about it here: https://en.wikipedia.org/wiki/Quickhull
+ * @description This program prints a tic tac toe board in screen
  */
 
 "use strict"
@@ -111,8 +111,8 @@ function main() {
   const CANVAS = document.getElementById("canvas");
   if (CANVAS.getContext) {
     const CONTEXT = CANVAS.getContext("2d");
-    CANVAS.width = window.innerHeight - 100;
-    CANVAS.height = window.innerHeight - 100;
+    CANVAS.width = window.innerHeight - 150;
+    CANVAS.height = window.innerHeight - 150;
 
     drawTicTacToe(CANVAS, CONTEXT);
   }
