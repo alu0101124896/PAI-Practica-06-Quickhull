@@ -56,15 +56,15 @@ function drawLines(thirdOfCanvas, CANVAS, CONTEXT) {
  */
 function drawX(xCoordinate, yCoordinate, thirdOfCanvas, CONTEXT) {
   CONTEXT.beginPath();
-  CONTEXT.moveTo(xCoordinate, yCoordinate);
-  CONTEXT.lineTo(xCoordinate + thirdOfCanvas, yCoordinate + thirdOfCanvas);
+  CONTEXT.moveTo(xCoordinate + 10, yCoordinate + 10);
+  CONTEXT.lineTo(xCoordinate + thirdOfCanvas - 10, yCoordinate + thirdOfCanvas - 10);
   CONTEXT.lineWidth = 5;
   CONTEXT.strokeStyle = 'black';
   CONTEXT.stroke();
 
   CONTEXT.beginPath();
-  CONTEXT.moveTo(xCoordinate, yCoordinate + thirdOfCanvas);
-  CONTEXT.lineTo(xCoordinate + thirdOfCanvas, yCoordinate);
+  CONTEXT.moveTo(xCoordinate + 10, yCoordinate + thirdOfCanvas - 10);
+  CONTEXT.lineTo(xCoordinate + thirdOfCanvas - 10, yCoordinate + 10);
   CONTEXT.lineWidth = 5;
   CONTEXT.strokeStyle = 'black';
   CONTEXT.stroke();
@@ -80,7 +80,8 @@ function drawX(xCoordinate, yCoordinate, thirdOfCanvas, CONTEXT) {
  */
 function drawO(xCoordinate, yCoordinate, thirdOfCanvas, CONTEXT) {
   CONTEXT.beginPath();
-  CONTEXT.arc(xCoordinate, xCoordinate, 50, 0, 2 * Math.PI);
+  CONTEXT.moveTo(xCoordinate, yCoordinate);
+  CONTEXT.arc(xCoordinate, yCoordinate, thirdOfCanvas / 2, 0, 2 * Math.PI);
   CONTEXT.stroke();
 }
 
@@ -101,6 +102,10 @@ function drawTicTacToe(CANVAS, CONTEXT) {
   drawO(0, thirdOfCanvas, thirdOfCanvas * 2, CANVAS, CONTEXT);
   drawO(thirdOfCanvas, thirdOfCanvas, thirdOfCanvas, CANVAS, CONTEXT);
   drawO(thirdOfCanvas * 2, thirdOfCanvas, thirdOfCanvas, CANVAS, CONTEXT);
+
+  CONTEXT.beginPath();
+  CONTEXT.arc(xCoordinate, yCoordinate, thirdOfCanvas / 2, 0, 2 * Math.PI);
+  CONTEXT.stroke();
 }
 
 /**
