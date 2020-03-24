@@ -29,7 +29,7 @@ class Point {
 
   /**
    * @description Constructor that creates an instance of Point and gives it a random color.
-   * 
+   *
    * @param {number} [x=0] - X coordinate
    * @param {number} [y=0] - Y coordinate
    * @memberof Point
@@ -183,7 +183,7 @@ function isInSide(pointToCheck, lineStartingPoint, lineEndingPoint) {
 
 /**
  * @description Recursive function that searchs for points outside of the current section of the convex hull
- * 
+ *
  * @param {array} convexHull - Array of points that forms the convex hull
  * @param {array} allCanvasPoints - Array of all canvas points
  * @param {array} subsetOfPoints - Array of the subset of points
@@ -234,7 +234,7 @@ function recursiveFindHull(convexHull, allCanvasPoints, subsetOfPoints, leftMost
 
 /**
  * @description Function that starts to search the convex hull of the given array of points
- * 
+ *
  * @param {array} allCanvasPoints - Array of all canvas points
  * @param {*} CONTEXT - Canvas context
  * @param {*} CANVAS - Canvas
