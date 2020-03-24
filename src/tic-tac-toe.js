@@ -80,8 +80,8 @@ function drawX(xCoordinate, yCoordinate, thirdOfCanvas, CONTEXT) {
  */
 function drawO(xCoordinate, yCoordinate, thirdOfCanvas, CONTEXT) {
   CONTEXT.beginPath();
-  CONTEXT.moveTo(xCoordinate, yCoordinate);
-  CONTEXT.arc(xCoordinate, yCoordinate, thirdOfCanvas / 2, 0, 2 * Math.PI);
+  // CONTEXT.moveTo(xCoordinate + (thirdOfCanvas / 2), yCoordinate + (thirdOfCanvas / 2));
+  CONTEXT.arc(xCoordinate + (thirdOfCanvas / 2), yCoordinate + (thirdOfCanvas / 2),  + (thirdOfCanvas / 2) * 0.9, 0, 2 * Math.PI);
   CONTEXT.stroke();
 }
 
@@ -99,13 +99,9 @@ function drawTicTacToe(CANVAS, CONTEXT) {
   drawX(0, thirdOfCanvas, thirdOfCanvas, CONTEXT);
   drawX(thirdOfCanvas * 2, thirdOfCanvas * 2, thirdOfCanvas, CONTEXT);
 
-  drawO(0, thirdOfCanvas, thirdOfCanvas * 2, CANVAS, CONTEXT);
-  drawO(thirdOfCanvas, thirdOfCanvas, thirdOfCanvas, CANVAS, CONTEXT);
-  drawO(thirdOfCanvas * 2, thirdOfCanvas, thirdOfCanvas, CANVAS, CONTEXT);
-
-  CONTEXT.beginPath();
-  CONTEXT.arc(xCoordinate, yCoordinate, thirdOfCanvas / 2, 0, 2 * Math.PI);
-  CONTEXT.stroke();
+  drawO(0, thirdOfCanvas * 2, thirdOfCanvas, CONTEXT);
+  drawO(thirdOfCanvas, thirdOfCanvas, thirdOfCanvas, CONTEXT);
+  drawO(thirdOfCanvas * 2, 0, thirdOfCanvas, CONTEXT);
 }
 
 /**
