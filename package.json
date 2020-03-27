@@ -1,0 +1,17 @@
+{
+  "name": "practica-06-quickhull-alu0101124896",
+  "version": "1.0.0",
+  "description": "Practica 06 Quick-Hull alu0101124896",
+  "scripts": {
+    "start": "node web-server/app.js"
+  },
+  "author": "Kevin Chisholm",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ULL-ESIT-INF-PAI-2019-2020/practica-06-quickhull-alu0101124896.git"
+  }
+}
