@@ -182,6 +182,15 @@ function isInSide(pointToCheck, lineStartingPoint, lineEndingPoint) {
 }
 
 /**
+ * @description Function that stops the execution the given amount of time
+ *
+ * @param {number} msToWait - Number of miniseconds to stop the execution
+ */
+function sleep(msToWait) {
+  return new Promise(resolve => setTimeout(resolve, msToWait));
+}
+
+/**
  * @description Recursive function that searchs for points outside of the current section of the convex hull
  *
  * @param {array} convexHull - Array of points that forms the convex hull
@@ -193,12 +202,13 @@ function isInSide(pointToCheck, lineStartingPoint, lineEndingPoint) {
  * @param {*} CANVAS - Canvas
  * @returns
  */
-function recursiveFindHull(convexHull, allCanvasPoints, subsetOfPoints, leftMostPoint, rightMostPoint, CONTEXT, CANVAS) {
+async function recursiveFindHull(convexHull, allCanvasPoints, subsetOfPoints, leftMostPoint, rightMostPoint, CONTEXT, CANVAS) {
   if (subsetOfPoints.length === 0) {
     return;
   } else if (subsetOfPoints.length === 1) {
     convexHull.splice(convexHull.indexOf(leftMostPoint), 0, subsetOfPoints[0]);
     redrawAll(convexHull, allCanvasPoints, CONTEXT, CANVAS);
+    await sleep(1000);
   } else {
     let farthestPoint;
     let farthestPointDistance = 0;
@@ -213,6 +223,7 @@ function recursiveFindHull(convexHull, allCanvasPoints, subsetOfPoints, leftMost
 
     convexHull.splice(convexHull.indexOf(leftMostPoint), 0, farthestPoint);
     redrawAll(convexHull, allCanvasPoints, CONTEXT, CANVAS);
+    await sleep(1000);
 
     let pointsInSide1 = [];
     let pointsInSide2 = [];
@@ -225,10 +236,10 @@ function recursiveFindHull(convexHull, allCanvasPoints, subsetOfPoints, leftMost
       }
     });
 
-    setTimeout(() => {
-      recursiveFindHull(convexHull, allCanvasPoints, pointsInSide1, leftMostPoint, farthestPoint, CONTEXT, CANVAS);
-      recursiveFindHull(convexHull, allCanvasPoints, pointsInSide2, farthestPoint, rightMostPoint, CONTEXT, CANVAS);
-    }, 1000);
+    // setTimeout(async () => {
+    await recursiveFindHull(convexHull, allCanvasPoints, pointsInSide1, leftMostPoint, farthestPoint, CONTEXT, CANVAS);
+    await recursiveFindHull(convexHull, allCanvasPoints, pointsInSide2, farthestPoint, rightMostPoint, CONTEXT, CANVAS);
+    // }, 1000);
   }
 }
 
@@ -239,7 +250,7 @@ function recursiveFindHull(convexHull, allCanvasPoints, subsetOfPoints, leftMost
  * @param {*} CONTEXT - Canvas context
  * @param {*} CANVAS - Canvas
  */
-function recursiveQuickHull(allCanvasPoints, CONTEXT, CANVAS) {
+async function recursiveQuickHull(allCanvasPoints, CONTEXT, CANVAS) {
   let convexHull = [];
 
   let leftMostPoint = findLeftMostPoint(allCanvasPoints);
@@ -248,6 +259,7 @@ function recursiveQuickHull(allCanvasPoints, CONTEXT, CANVAS) {
   convexHull.push(leftMostPoint);
   convexHull.push(rightMostPoint);
   redrawAll(convexHull, allCanvasPoints, CONTEXT, CANVAS);
+  await sleep(1000);
 
   let pointsInSide1 = [];
   let pointsInSide2 = [];
@@ -260,10 +272,10 @@ function recursiveQuickHull(allCanvasPoints, CONTEXT, CANVAS) {
     }
   });
 
-  setTimeout(() => {
-    recursiveFindHull(convexHull, allCanvasPoints, pointsInSide1, leftMostPoint, rightMostPoint, CONTEXT, CANVAS);
-    recursiveFindHull(convexHull, allCanvasPoints, pointsInSide2, rightMostPoint, leftMostPoint, CONTEXT, CANVAS);
-  }, 1000);
+  // setTimeout(async () => {
+  await recursiveFindHull(convexHull, allCanvasPoints, pointsInSide1, leftMostPoint, rightMostPoint, CONTEXT, CANVAS);
+  await recursiveFindHull(convexHull, allCanvasPoints, pointsInSide2, rightMostPoint, leftMostPoint, CONTEXT, CANVAS);
+  // }, 1000);
 }
 
 /**
